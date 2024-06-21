@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic vue</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{message}}</h2>
+      <p>{{number *90}}</p> <br>
+      <a :href="url">Google</a> <br>
+      <button @click="number2++">{{number2}}</button> <br>
+      <button @click="number2--">Decrease</button>
+
+      <!-- modifiers -->
+      <form action="" @submit.prevent="number2++">
+        <button>Submit</button>
+      </form>
+
+      <!-- two way binding -->
+      <form action="">
+        <input type="text" id="bd" v-model="text">
+        {{text}}
+      </form>
+
+      <!-- SMALL EXAMPLE -->
+      <form action="">
+        {{ sign }}
+     
+
+      <input type="checkbox" v-model="sign" value="Rice">Rice</input>
+      <input type="checkbox" v-model="sign" value="Esther">Esther</input>
+    </form>
+      <form action="">
+        <fieldset style="padding: 20px;margin: 15px;">
+          <legend>checkbox</legend>
+          <label for="">checkbox</label>
+          <input type="checkbox" v-model="options" value="option 1"><br>
+
+        <label for="">selecting option two will disable option one</label>
+        <input type="checkbox" v-model="options"  value="option 2"><br>
+
+          <label for="">option 3 is disabled</label>
+          <input type="checkbox" v-model="options"  value="option 3"><br>
+
+          <h4>You selected: {{options}}</h4>
+        </fieldset>
+      </form>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+      const app = createApp({
+        data() {
+          return {
+            message: "Hello world",
+            number: 100,
+            text:"  ",
+
+            // vbind
+            url:"https://www.google.com",
+            options:[],
+            number2:0,
+            sign: ["Esther"]
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
