@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue events contd</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .box{
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background: #ddd;
+            margin: 20px;
+            display: inline-block;
+        }
+        .txt{
+            color:rgb(147, 192, 210);
+            cursor:text;
+        }
+        .three{
+           margin: 20px;
+           background-color: rgb(74, 74, 74);
+           padding: 10px;
+           border-radius: 10px;
+           color: white;
+           font-size: 25px;
+        }
+        .three:hover{
+            background-color: rgb(95, 91, 91);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+<!--mouse events -->
+<div id="app">
+  <div class="box" @mouseover="handleEvent">mouseover</div>
+  <div class="box" @mouseleave="handleEvent" >mouseleave</div>
+  <div class="box" @dblclick="handleEvent">double click</div>
+  <div class="box" @mousemove="handleMousemove">Position- {{x}}-{{y}}</div>
+
+<p>{{"We have "+ count +" Sharwama"}}</p>
+<button @click="count++">increment</button> <br>
+
+<input type="text" @input="inputC++" placeholder="type here..">
+<p>There has been {{inputC}} inputs</p>
+
+<!-- event target example  -->
+<div class="etarg">
+    <textarea name="tarea" @input="writeHere" id="" cols="30" rows="10"></textarea>    
+    <div class="box">
+        <span class="txt">{{text}}</span>
+    </div>
+</div>
+
+<div class="counts">
+    <h2>{{counting}}</h2>
+    <span class="three" @click="countIt(1)">+1</span> 
+    <span class="three" @click="countIt(5)">+5</span>
+    <span class="three" @click="countIt(4)">+4</span>
+</div>
+
+<!-- Event Modifiers examples -->
+<!-- v-on:submit.prevent -->
+<!-- v-on:click.once -->
+<!-- v-on:keyup.enter -->
+<button @click.once="clickMe">click me </button>
+
+
+<!-- keyboard key event modifiers -->
+<h3 >Save document click ctrl+s</h3>
+<textarea @click.keyup.s="save" name="" id="" cols="30" rows="10"></textarea>
+
+<!-- mouse key event modifiers -->
+<div class="box" @ctrl.right.ctrl="changeColor" 
+:style="background-color:'hsl('+bgColor+',80%,80%)'"  >
+  <h3>click to change background-color</h3>
+</div>
+
+<!-- v-model  for FORMS -->
+<form action="" @submit.prevent="addItem">
+    <p>Add item</p>
+    <p>Item name: <input type="text" required v-model="itemTxt"></p>
+    <p>How many: <input type="text" v-model="itemNumber"></p>
+    <button type="submit">Add Item</button>
+</form>
+
+<p>Shopping List</p>
+<ul>
+    <li v-for="item in shoppingList">{{itemName}},{{itemNumber}}</li>
+</ul>
+
+</div>
+
+
+
+<script src="app.js"></script>
+</body>
+</html>

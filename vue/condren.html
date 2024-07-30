@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>conditional rendering using v-if</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div v-if="showBooks">
+     <p>{{ title}} - {{author}} - {{age}}</p>  
+    </div>
+
+    <button @click="toggleShowBooks">
+        <span v-if="showBooks">hide books</span>
+        <span v-else>show books</span>
+        <!-- <span v-if ="!showBooks">show books</span> -->
+    </button>
+ 
+    <!-- jus like css display block n none -->
+    <div v-show="showBooks">
+        Currently showing books
+    </div>
+    {{ foods.length }}
+    <h2 v-for="(food,index) in foods">{{index}}:{{food.name}}</h2>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

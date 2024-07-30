@@ -32,7 +32,7 @@
 
       <!-- two way binding -->
       <form action="">
-        <input type="text" id="bd" v-model="text">
+        <input type="text" id="bd" placeholder="type here" v-model="text">
         {{text}}
       </form>
 
@@ -53,10 +53,10 @@
 
 
         <label for="">selecting option two will disable option one</label>
-        <input type="checkbox" v-model="options"  value="option 2"><br>
+        <input type="checkbox" v-model="options"  value="option 2" :disabled="disableOption1"><br>
 
           <label for="">option 3 is disabled</label>
-          <input type="checkbox" v-model="options"  value="option 3"><br>
+          <input type="checkbox" v-model="options"  value="option 3" :disabled="disableOption1"><br>
 
           <h4>You selected: {{options}}</h4>
         </fieldset>
@@ -81,26 +81,40 @@
 
        <!---------------------------list rendering (loop) --------------------- -->
        <!------------always use a key for v-for-------------  -->
-       <h3 v-for="blog in blogs" :key="blogs.id">{{blog.title}}
+       <h3 v-for="blog in blogs" :key="blog
+       .id">{{blog.title}}
         <li>{{blog.body}}</li>
        </h3>
 
        <!-----------------------------COMPUTED PROPERTY  ---------------------->
        <h3>{{reverseMessage}}</h3>
      <!--------------------------Watcher  ----------------------->
-     <h2>Esther is at {{atHome === 'home' ? 'home':'work'}}</h2>
+     <!-- <h2>Esther is at {{atHome === 'home' ? 'home':'work'}}</h2> -->
+
+     
+    <!-----------------------NEW VIDEO  -------------------------->
+     <!--------------------v-cloak  ---------------------->
+     <!-------------Two way binding  --------------------->
+     <p>{{firstname}}</p>
+     <hr>
+     <label for="fname">Firstname</label>
+     <input type="text" placeholder="firstname" v-model="firstname"/> <br>
+     <label for="lname">Lastname</label>
+     <input type="text" placeholder="lastname" v-model="lastname"/> <br>
+
 
     </div>
 
 
+
     <script>
-      const { createApp } = Vue;
-      const app = createApp({
+      const vm = Vue.createApp({
         data() {
           return {
-            message: "Hello world",
+            // message: "Hello world",
             number: 100,
             text:"  ",
+            firstname:" ",
 
             // vbind
             url:"https://www.google.com",
@@ -118,7 +132,8 @@
             online:false,
             name:"Esther",   
             message:"helloooo",
-            atHome:'home',
+            // atHome:'home',
+            disableOption1:false,
             
             blogs:[
             {
@@ -150,16 +165,20 @@
           },
           computed:{
               reverseMessage(){
-                this.message.split('').reverse('').join('')
+                return this.message.split('').reverse().join('')
               }
           },
+          // watch:{
+          //    atHome:function(){
+          //      console.log("you are being watched at")
+          //    }
+          // }
           watch:{
-             atHome:function(newValue){
-               console.log("you are being watched at "+newValue)
-             }
+            disableOption1(newVal,oldVal){
+              this.options[0].disabled = newVal;
+            }
           }
-      }); 
-      app.mount("#app");
+      }).mount("#app");
     </script>
   </body>
 </html>
